@@ -80,6 +80,9 @@ AB_OTA_UPDATER := true
 #TARGET_RECOVERY_DEVICE_MODULES += android.hardware.boot@1.0
 #TW_RECOVERY_ADDITIONAL_RELINK_FILES := ${OUT}/system/lib64/android.hardware.boot@1.0.so
 
+# Treble
+BOARD_PROPERTY_OVERRIDES_SPLIT_ENABLED := true
+PRODUCT_FULL_TREBLE_OVERRIDE := true
 PB_OFFICIAL := true
 
 # Security Patch Hack to prevent Anti Rollback
