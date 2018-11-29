@@ -1,6 +1,3 @@
 vendor.goodix.hardware.fingerprint::IGoodixBiometricsFingerprint			u:object_r:hal_fingerprint_hwservice:s0
 vendor.lineage.power::ILineagePower							u:object_r:hal_power_hwservice:s0
-vendor.lineage.power::ILineagePower							u:r:hal_power_default:s0
-vendor.lineage.power::ILineagePower							u:object_r:default_android_hwservice:s0
-vendor.lineage.power::ILineagePower							hwservice_manager permissive=0
 
