@@ -15,7 +15,6 @@
 #
 
 $(call inherit-product, vendor/xiaomi/daisy/daisy-vendor.mk)
-$(call inherit-product, $(SRC_TARGET_DIR)/product/product_launched_with_o_mr1.mk)
 
 # Overlay
 
@@ -27,6 +26,7 @@ AB_OTA_UPDATER := true
 
 AB_OTA_PARTITIONS += \
     boot \
+    vendor \
     system
 
 AB_OTA_POSTINSTALL_CONFIG += \
@@ -41,6 +41,7 @@ PRODUCT_PACKAGES += \
 # Boot control
 PRODUCT_PACKAGES += \
     android.hardware.boot@1.0-impl \
+    vendor.qti.hardware.factory@1.0.so \
     android.hardware.boot@1.0-service \
     bootctrl.msm8953 \
 
@@ -73,12 +74,8 @@ PRODUCT_PACKAGES += \
 PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/configs/sensors/sensor_def_qcomdev.conf:$(TARGET_COPY_OUT_VENDOR)/etc/sensors/sensor_def_qcomdev.conf
 
-PRODUCT_COPY_FILES += \
-    $(LOCAL_PATH)/manifest.xml:system/etc/manifest.xml
-
 # Update engine
 PRODUCT_PACKAGES += \
-    brillo_update_payload \
     update_engine \
     update_engine_sideload \
     update_verifier
@@ -86,15 +83,16 @@ PRODUCT_PACKAGES += \
 PRODUCT_PACKAGES_DEBUG += \
     update_engine_client
 
-# Vndk hack
-#PRODUCT_COPY_FILES += \
-#    prebuilts/vndk/v27/arm64/arch-arm64-armv8-a/shared/vndk-core/android.frameworks.sensorservice@1.0.so:system/lib64/android.frameworks.sensorservice@1.0-v27.so \
-#    prebuilts/vndk/v27/arm/arch-arm-armv7-a-neon/shared/vndk-core/android.frameworks.sensorservice@1.0.so:system/lib/android.frameworks.sensorservice@1.0-v27.so
+
+# Keymaster HAL
+#PRODUCT_PACKAGES += \
+#    android.hardware.keymaster@3.0-impl \
+#    android.hardware.keymaster@3.0-service
 
 PRODUCT_PACKAGES += \
-    vendor.qti.hardware.factory@1.0-service \
-    android.hardware.gatekeeper@1.0-service-qti
+    vendor.qti.hardware.factory@1.0-service
 
 # Verity
-#PRODUCT_SYSTEM_VERITY_PARTITION := /dev/block/platform/soc/7824900.sdhci/by-name/system
-#$(call inherit-product, build/target/product/verity.mk)
+PRODUCT_SYSTEM_VERITY_PARTITION := /dev/block/platform/soc/7824900.sdhci/by-name/system
+PRODUCT_VENDOR_VERITY_PARTITION := /dev/block/platform/soc/7824900.sdhci/by-name/system
+$(call inherit-product, build/target/product/verity.mk)

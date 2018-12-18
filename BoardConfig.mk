@@ -16,6 +16,8 @@
 # Inherit from common msm8953-common
 -include device/xiaomi/msm8953-common/BoardConfigCommon.mk
 
+TARGET_CPU_SMP := true
+ARCH_ARM_HAVE_TLS_REGISTER := true
 DEVICE_PATH := device/xiaomi/daisy
 
 # Filesystem
@@ -52,11 +54,17 @@ BOARD_VOLD_EMMC_SHARES_DEV_MAJOR := true
 TARGET_TAP_TO_WAKE_NODE := "/proc/touchpanel/enable_dt2w"
 
 # Properties
-#TARGET_SYSTEM_PROP := $(DEVICE_PATH)/system.prop
+TARGET_SYSTEM_PROP := $(DEVICE_PATH)/system.prop
 TARGET_PROVIDES_QTI_TELEPHONY_JAR := true
 
 # Sepolicy
 BOARD_SEPOLICY_DIRS += $(DEVICE_PATH)/sepolicy
+
+DEVICE_MANIFEST_FILE := $(DEVICE_PATH)/manifest.xml
+DEVICE_MATRIX_FILE := $(DEVICE_PATH)/compatibility_matrix.xml
+
+TARGET_KEYMASTER_WAIT_FOR_QSEE := true
+TARGET_HW_KEYMASTER_V03 := true
 
 # TWRP Configuration
 BOARD_HAS_LARGE_FILESYSTEM := true
@@ -81,6 +89,10 @@ AB_OTA_UPDATER := true
 #TW_RECOVERY_ADDITIONAL_RELINK_FILES := ${OUT}/system/lib64/android.hardware.boot@1.0.so
 
 # Treble
+ENABLE_VENDOR_IMAGE := true
+PRODUCT_VENDOR_MOVE_ENABLED := true
+PRODUCT_COMPATIBILITY_MATRIX_LEVEL_OVERRIDE := 28
+PRODUCT_SHIPPING_API_LEVEL := 27
 BOARD_PROPERTY_OVERRIDES_SPLIT_ENABLED := true
 PRODUCT_FULL_TREBLE_OVERRIDE := true
 PB_OFFICIAL := true
