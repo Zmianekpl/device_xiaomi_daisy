@@ -1,6 +1,3 @@
-#
-# Copyright (C) 2017 The LineageOS Project
-#
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
 # You may obtain a copy of the License at
@@ -26,9 +23,10 @@
 LOCAL_PATH := $(call my-dir)
 
 ifeq ($(TARGET_DEVICE),daisy)
+
 include $(call all-makefiles-under,$(LOCAL_PATH))
 
-
+include $(CLEAR_VARS)
 LOCAL_MODULE := wifi_symlinks
 LOCAL_MODULE_TAGS := optional
 LOCAL_MODULE_CLASS := FAKE

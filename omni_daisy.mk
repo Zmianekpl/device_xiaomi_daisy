@@ -1,6 +1,3 @@
-#
-# Copyright (C) 2017 The LineageOS Project
-#
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
 # You may obtain a copy of the License at
@@ -16,12 +13,17 @@
 
 $(call inherit-product, device/xiaomi/daisy/full_daisy.mk)
 
-# Inherit some common LineageOS stuff.
-$(call inherit-product, vendor/lineage/config/common_full_phone.mk)
+# Inherit some common omni stuff.
+$(call inherit-product, vendor/omni/config/common.mk)
+$(call inherit-product, vendor/omni/config/gsm.mk)
+
+PRODUCT_RELEASE_NAME := daisy
+
+$(call inherit-product, build/target/product/embedded.mk)
 
 PRODUCT_NAME := omni_daisy
-BOARD_VENDOR := Xiaomi
-
+TARGET_VENDOR_PRODUCT_NAME := daisy
+TARGET_VENDOR_DEVICE_NAME := daisy
 PRODUCT_GMS_CLIENTID_BASE := android-xiaomi
 
 PRODUCT_BUILD_PROP_OVERRIDES += \

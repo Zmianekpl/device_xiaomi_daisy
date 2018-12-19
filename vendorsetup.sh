@@ -1,0 +1,3 @@
+add_lunch_combo omni_daisy-userdebug
+add_lunch_combo omni_daisy-user
+add_lunch_combo omni_daisy-eng
