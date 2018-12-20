@@ -1,5 +1,6 @@
 /*
- * Copyright (C) 2018 Omnirom
+ * Copyright (C) 2015 The CyanogenMod Project
+ *               2017-2018 The LineageOS Project
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -14,7 +15,7 @@
  * limitations under the License.
  */
 
-package org.omnirom.device;
+package org.lineageos.settings.doze;
 
 import android.app.ActionBar;
 import android.app.Activity;
@@ -30,7 +31,6 @@ import android.support.v14.preference.SwitchPreference;
 import android.support.v7.preference.Preference;
 import android.support.v7.preference.PreferenceCategory;
 import android.support.v7.preference.Preference.OnPreferenceChangeListener;
-import android.provider.Settings;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
@@ -41,8 +41,6 @@ import android.widget.TextView;
 
 public class DozeSettingsFragment extends PreferenceFragment implements OnPreferenceChangeListener,
         CompoundButton.OnCheckedChangeListener {
-
-    private static final String KEY_FOOTER = "footer";
 
     private TextView mTextView;
 
@@ -75,11 +73,6 @@ public class DozeSettingsFragment extends PreferenceFragment implements OnPrefer
 
         mPocketPreference = (SwitchPreference) findPreference(Utils.GESTURE_POCKET_KEY);
         mPocketPreference.setEnabled(dozeEnabled);
-
-        Preference footer = findPreference(KEY_FOOTER);
-        if (isAmbientDisplayEnabled()) {
-            getPreferenceScreen().removePreference(footer);
-        }
 
         // Hide proximity sensor related features if the device doesn't support them
         if (!Utils.getProxCheckBeforePulse(getActivity())) {
@@ -139,7 +132,7 @@ public class DozeSettingsFragment extends PreferenceFragment implements OnPrefer
         return false;
     }
 
-    public static class HelpDialogFragment extends DialogFragment {
+    private static class HelpDialogFragment extends DialogFragment {
         @Override
         public Dialog onCreateDialog(Bundle savedInstanceState) {
             return new AlertDialog.Builder(getActivity())
@@ -161,9 +154,5 @@ public class DozeSettingsFragment extends PreferenceFragment implements OnPrefer
     private void showHelp() {
         HelpDialogFragment fragment = new HelpDialogFragment();
         fragment.show(getFragmentManager(), "help_dialog");
-    }
-
-    private boolean isAmbientDisplayEnabled() {
-        return Settings.Secure.getInt(getContext().getContentResolver(), Settings.Secure.DOZE_ENABLED, 1) == 1;
     }
 }

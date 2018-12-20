@@ -1,5 +1,6 @@
 /*
- * Copyright (C) 2018 Omnirom
+ * Copyright (c) 2015 The CyanogenMod Project
+ *               2017 The LineageOS Project
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -14,33 +15,27 @@
  * limitations under the License.
  */
 
-package org.omnirom.device;
+package org.lineageos.settings.doze;
 
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import android.content.SharedPreferences;
 import android.os.UserHandle;
-import android.support.v14.preference.SwitchPreference;
 import android.support.v7.preference.PreferenceManager;
 import android.provider.Settings;
 import android.util.Log;
-import java.io.BufferedReader;
-import java.io.FileReader;
 
 import static android.provider.Settings.Secure.DOZE_ENABLED;
 
 public final class Utils {
 
-    private static final String TAG = "Utils";
+    private static final String TAG = "DozeUtils";
     private static final boolean DEBUG = false;
+
     private static final String DOZE_INTENT = "com.android.systemui.doze.pulse";
 
     protected static final String CATEG_PROX_SENSOR = "proximity_sensor";
+
     protected static final String GESTURE_PICK_UP_KEY = "gesture_pick_up";
     protected static final String GESTURE_HAND_WAVE_KEY = "gesture_hand_wave";
     protected static final String GESTURE_POCKET_KEY = "gesture_pocket";
@@ -110,99 +105,5 @@ public final class Utils {
     protected static boolean sensorsEnabled(Context context) {
         return pickUpEnabled(context) || handwaveGestureEnabled(context)
                 || pocketGestureEnabled(context);
-    }
-
-    /**
-     * Write a string value to the specified file.
-     * @param filename      The filename
-     * @param value         The value
-     */
-    public static void writeValue(String filename, String value) {
-        try {
-            FileOutputStream fos = new FileOutputStream(new File(filename));
-            fos.write(value.getBytes());
-            fos.flush();
-            fos.close();
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
-
-    public static boolean fileExists(String filename) {
-        return new File(filename).exists();
-    }
-
-    public static boolean fileWritable(String filename) {
-        return fileExists(filename) && new File(filename).canWrite();
-    }
-
-    public static boolean isPreferenceEnabled(Context context, String key) {
-        SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(context);
-        return preferences.getBoolean(key, (Boolean) Constants.sNodeDefaultMap.get(key));
-    }
-
-    public static String getPreferenceString(Context context, String key) {
-        SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(context);
-        return preferences.getString(key, (String) Constants.sNodeDefaultMap.get(key));
-    }
-
-    public static void updateDependentPreference(Context context, SwitchPreference b,
-            String key, boolean shouldSetEnabled) {
-        SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(context);
-        boolean prefActualValue = preferences.getBoolean(key, false);
-
-        if (shouldSetEnabled) {
-            if (Constants.sNodeUserSetValuesMap.get(key) != null &&
-                    (Boolean) Constants.sNodeUserSetValuesMap.get(key)[1] &&
-                    (Boolean) Constants.sNodeUserSetValuesMap.get(key)[1] != prefActualValue) {
-                b.setChecked(true);
-                Constants.sNodeUserSetValuesMap.put(key, new Boolean[]{ prefActualValue, false });
-            }
-        } else {
-            if (b.isEnabled() && prefActualValue) {
-                Constants.sNodeUserSetValuesMap.put(key, new Boolean[]{ prefActualValue, true });
-            }
-            b.setEnabled(false);
-            b.setChecked(false);
-        }
-    }
-
-    public static void broadcastCustIntent(Context context, boolean value) {
-        final Intent intent = new Intent(Constants.CUST_INTENT);
-        intent.putExtra(Constants.CUST_INTENT_EXTRA, value);
-        context.sendBroadcastAsUser(intent, UserHandle.CURRENT);
-    }
-
-    public static String getFileValue(String filename, String defValue) {
-        String fileValue = readLine(filename);
-        if(fileValue!=null){
-            return fileValue;
-        }
-        return defValue;
-    }
-
-    public static String readLine(String filename) {
-        if (filename == null) {
-            return null;
-        }
-        BufferedReader br = null;
-        String line = null;
-        try {
-            br = new BufferedReader(new FileReader(filename), 1024);
-            line = br.readLine();
-        } catch (IOException e) {
-            return null;
-        } finally {
-            if (br != null) {
-                try {
-                    br.close();
-                } catch (IOException e) {
-                    // ignore
-                }
-            }
-        }
-        return line;
     }
 }
