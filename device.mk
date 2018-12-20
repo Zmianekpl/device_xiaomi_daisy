@@ -11,8 +11,6 @@
 # limitations under the License.
 #
 
-$(call inherit-product, vendor/xiaomi/daisy/daisy-vendor.mk)
-
 # Overlay
 
 # A/B
@@ -159,15 +157,6 @@ PRODUCT_PACKAGES += \
 # Sensors
 PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/configs/sensors/sensor_def_qcomdev.conf:$(TARGET_COPY_OUT_VENDOR)/etc/sensors/sensor_def_qcomdev.conf
-
-# Update engine
-PRODUCT_PACKAGES += \
-    update_engine \
-    update_engine_sideload \
-    update_verifier
-
-PRODUCT_PACKAGES_DEBUG += \
-    update_engine_client
 
 PRODUCT_PACKAGES += \
     vendor.qti.hardware.factory@1.0-service
@@ -455,3 +444,5 @@ PRODUCT_COPY_FILES += \
 PRODUCT_SYSTEM_VERITY_PARTITION := /dev/block/platform/soc/7824900.sdhci/by-name/system
 PRODUCT_VENDOR_VERITY_PARTITION := /dev/block/platform/soc/7824900.sdhci/by-name/system
 $(call inherit-product, build/target/product/verity.mk)
+
+$(call inherit-product, vendor/xiaomi/daisy/daisy-vendor.mk)
