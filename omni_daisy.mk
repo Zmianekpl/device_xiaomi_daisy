@@ -13,21 +13,32 @@
 
 $(call inherit-product, device/xiaomi/daisy/full_daisy.mk)
 
-# Inherit some common omni stuff.
-$(call inherit-product, vendor/omni/config/common.mk)
+$(call inherit-product, $(SRC_TARGET_DIR)/product/core_64_bit.mk)
+
+# Get the prebuilt list of APNs
 $(call inherit-product, vendor/omni/config/gsm.mk)
 
-PRODUCT_RELEASE_NAME := daisy
+# must be before including omni part
+TARGET_BOOTANIMATION_SIZE := 1080p
 
-$(call inherit-product, build/target/product/embedded.mk)
+# Inherit some common Omni stuff.
+$(call inherit-product, vendor/omni/config/common.mk)
+
+# Inherit from the common Open Source product configuration
+$(call inherit-product, $(SRC_TARGET_DIR)/product/aosp_base_telephony.mk)
 
 PRODUCT_NAME := omni_daisy
+PRODUCT_DEVICE := daisy
+PRODUCT_BRAND := Xiaomi
+PRODUCT_MODEL := MI A2 Lite
+PRODUCT_MANUFACTURER := Xiaomi
 TARGET_VENDOR_PRODUCT_NAME := daisy
 TARGET_VENDOR_DEVICE_NAME := daisy
 PRODUCT_GMS_CLIENTID_BASE := android-xiaomi
+PRODUCT_RELEASE_NAME := daisy
 
 PRODUCT_BUILD_PROP_OVERRIDES += \
-    PRIVATE_BUILD_DESC="daisy-user 8.1.0 OPM1.171019.019 8.1.10 release-keys"
-
-# Set BUILD_FINGERPRINT variable to be picked up by both system and vendor build.prop
-BUILD_FINGERPRINT := "xiaomi/daisy/daisy_sprout:8.1.0/OPM1.171019.019/V9.6.11.0.ODLMIFF:user/release-keys"
+    TARGET_DEVICE="daisy" \
+    PRODUCT_NAME="daisy" \
+    BUILD_FINGERPRINT="xiaomi/daisy/daisy_sprout:9/PKQ1.180917.001/V10.0.1.0.PDLMIFJ:user/release-keys" \
+PRIVATE_BUILD_DESC="daisy-user 9 PKQ1.180917.001 V10.0.1.0.PDLMIFJ release-keys"

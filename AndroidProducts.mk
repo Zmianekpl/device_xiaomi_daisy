@@ -15,4 +15,6 @@
 #
 
 PRODUCT_MAKEFILES := \
+    $(LOCAL_DIR)/full_daisy.mk \
     $(LOCAL_DIR)/omni_daisy.mk
+
