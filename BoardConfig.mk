@@ -41,7 +41,7 @@ TARGET_2ND_CPU_VARIANT := cortex-a53
 # Qualcomm
 TARGET_SPECIFIC_HEADER_PATH := $(DEVICE_PATH)/include
 BOARD_USES_QCOM_HARDWARE := true
-TARGET_USES_QCOM_BSP := true
+TARGET_USES_QCOM_BSP := false
 
 # Kernel
 BOARD_KERNEL_CMDLINE := androidboot.hardware=qcom msm_rtb.filter=0x237 ehci-hcd.park=3 lpm_levels.sleep_disabled=1 androidboot.bootdevice=7824900.sdhci earlycon=msm_hsl_uart,0x78af000
