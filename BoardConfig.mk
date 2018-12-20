@@ -54,9 +54,9 @@ BOARD_KERNEL_IMAGE_NAME := Image.gz-dtb
 TARGET_KERNEL_ARCH := arm64
 TARGET_KERNEL_HEADER_ARCH := arm64
 TARGET_KERNEL_SOURCE := kernel/xiaomi/msm8953
-TARGET_KERNEL_CONFIG := daisy-perf_defconfig
+TARGET_KERNEL_CONFIG := daisy-full_defconfig
 TARGET_KERNEL_CROSS_COMPILE_PREFIX := aarch64-linux-android-
-TARGET_KERNEL_CLANG_COMPILE := true
+#TARGET_KERNEL_CLANG_COMPILE := true
 
 # Partitions
 #BOARD_USERDATAIMAGE_FILE_SYSTEM_TYPE := ext4
@@ -107,6 +107,8 @@ USE_CUSTOM_AUDIO_POLICY := 1
 USE_XML_AUDIO_POLICY_CONF := 1
 AUDIO_FEATURE_ENABLED_SND_MONITOR := true
 
+TARGET_ENABLE_MEDIADRM_64 := true
+
 # ANT
 #BOARD_ANT_WIRELESS_DEVICE := "vfs-prerelease"
 BOARD_ANT_WIRELESS_DEVICE := "qualcomm-hidl"
@@ -148,7 +150,7 @@ OVERRIDE_RS_DRIVER := libRSDriver_adreno.so
 SF_VSYNC_EVENT_PHASE_OFFSET_NS := 6000000
 VSYNC_EVENT_PHASE_OFFSET_NS := 2000000
 
-NUM_FRAMEBUFFER_SURFACE_BUFFERS := 3
+#NUM_FRAMEBUFFER_SURFACE_BUFFERS := 3
 
 # Init
 TARGET_INIT_VENDOR_LIB := libinit_msm8953
@@ -188,7 +190,8 @@ DEVICE_MANIFEST_FILE := $(DEVICE_PATH)/manifest.xml
 DEVICE_MATRIX_FILE := $(DEVICE_PATH)/compatibility_matrix.xml
 
 # Root Folders
-BOARD_ROOT_EXTRA_FOLDERS := bt_firmware dsp firmware persist
+BOARD_ROOT_EXTRA_FOLDERS := oem
+BOARD_ROOT_EXTRA_SYMLINKS := /vendor/bt_firmware:/bt_firmware /vendor/dsp:/dsp /vendor/firmware_mnt:/firmware /mnt/vendor/persist:/persist
 
 #Storage
 BOARD_HAS_REMOVABLE_STORAGE := true

@@ -22,123 +22,91 @@ import android.content.Context;
 import android.content.SharedPreferences;
 import android.preference.PreferenceManager;
 import android.database.ContentObserver;
-import android.support.v7.preference.DialogPreference;
-import android.support.v7.preference.Preference;
-import android.content.DialogInterface;
+import android.preference.SeekBarDialogPreference;
 import android.util.AttributeSet;
 import android.view.View;
 import android.widget.SeekBar;
-import android.widget.TextView;
+import android.widget.Button;
 import android.os.Bundle;
 import android.util.Log;
 import android.os.Vibrator;
-import android.view.LayoutInflater;
-import android.app.AlertDialog;
 
-import java.util.List;
-
-public class VibratorStrengthPreference extends DialogPreference implements
+public class VibratorStrengthPreference extends SeekBarDialogPreference implements
         SeekBar.OnSeekBarChangeListener {
-
-    public static final String KEY_VIBSTRENGTH = "vib_strength";
 
     private SeekBar mSeekBar;
     private int mOldStrength;
     private int mMinValue;
     private int mMaxValue;
-    private float offset;
     private Vibrator mVibrator;
-    private TextView mValueText;
+    private Button mTestButton;
 
-    private static final String FILE_LEVEL = "/sys/class/timed_output/vibrator/vtg_level";
-    private static final String FILE_MIN = "/sys/class/timed_output/vibrator/vtg_min";
-    private static final String FILE_MAX = "/sys/class/timed_output/vibrator/vtg_max";
+    private static final String FILE_LEVEL = "/sys/devices/virtual/timed_output/vibrator/vtg_level";
     private static final long testVibrationPattern[] = {0,250};
 
     public VibratorStrengthPreference(Context context, AttributeSet attrs) {
         super(context, attrs);
+        // from drivers/platform/msm/qpnp-haptic.c
+        // #define QPNP_HAP_VMAX_MIN_MV		116
+        // #define QPNP_HAP_VMAX_MAX_MV		3596
+        mMinValue = 116;
+        mMaxValue = 3596;
+
         mVibrator = (Vibrator) context.getSystemService(Context.VIBRATOR_SERVICE);
+        setDialogLayoutResource(R.layout.preference_dialog_vibrator_strength);
     }
 
-    public boolean onDisplayPreferenceDialog(Preference preference) {
-        if (preference instanceof VibratorStrengthPreference) {
-        	mOldStrength = Integer.parseInt(getValue(getContext()));
-			mMinValue = Integer.parseInt(Utils.getFileValue(FILE_MIN, "0"));
-        	mMaxValue = Integer.parseInt(Utils.getFileValue(FILE_MAX, "100"));
-        	offset = mMaxValue/100f;
+    @Override
+    protected void showDialog(Bundle state) {
+        super.showDialog(state);
+    }
 
-            View view = LayoutInflater.from(getContext()).inflate(R.layout.preference_dialog_vibrator_strength, null);
-            mSeekBar = (SeekBar)view.findViewById(R.id.seekbar);
-            mValueText = (TextView) view.findViewById(R.id.current_value);
+    @Override
+    protected void onBindDialogView(View view) {
+        super.onBindDialogView(view);
 
-            mSeekBar.setMax(mMaxValue - mMinValue);
-            mSeekBar.setProgress(mOldStrength - mMinValue);
-            mValueText.setText(Integer.toString(Math.round(mOldStrength / offset)) + "%");
-            mSeekBar.setOnSeekBarChangeListener(this);
+        mOldStrength = Integer.parseInt(getValue(getContext()));
+        mSeekBar = getSeekBar(view);
+        mSeekBar.setMax(mMaxValue - mMinValue);
+        mSeekBar.setProgress(mOldStrength - mMinValue);
 
-            new AlertDialog.Builder(getContext())
-                    .setView(view)
-                    .setTitle(getContext().getString(R.string.vibrator_summary))
-                    .setPositiveButton(android.R.string.ok, clickPositiveButton())
-                    .setNegativeButton(android.R.string.cancel, clickNegativeButton())
-                    .show();
-
-            return true;
+        mTestButton = (Button) view.findViewById(R.id.vib_test);
+        if (!mVibrator.hasVibrator()){
+            mTestButton.setEnabled(false);
+        } else {
+            mTestButton.setOnClickListener(new View.OnClickListener() {
+                public void onClick(View v) {
+                    mVibrator.vibrate(testVibrationPattern, -1);
+                }
+            });
         }
-        return false;
-    }
-
-    private DialogInterface.OnClickListener clickNegativeButton() {
-        return new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-                restoreOldState();
-
-                mVibrator.cancel();
-            }
-        };
-    }
-
-    private DialogInterface.OnClickListener clickPositiveButton() {
-        return new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-                final int value = mSeekBar.getProgress() + mMinValue;
-                setValue(String.valueOf(value));
-                SharedPreferences.Editor editor = PreferenceManager.getDefaultSharedPreferences(getContext()).edit();
-                editor.putString(KEY_VIBSTRENGTH, String.valueOf(value));
-                editor.commit();
-
-                mVibrator.cancel();
-            }
-        };
+        mSeekBar.setOnSeekBarChangeListener(this);
     }
 
     public static boolean isSupported() {
         return Utils.fileWritable(FILE_LEVEL);
     }
 
-    public static String getValue(Context context) {
-        return Utils.getFileValue(FILE_LEVEL, "100");
-    }
+	public static String getValue(Context context) {
+		return Utils.getFileValue(FILE_LEVEL, "2700");
+	}
 
-    private void setValue(String newValue) {
-        Utils.writeValue(FILE_LEVEL, newValue);
-    }
+	private void setValue(String newValue) {
+	    Utils.writeValue(FILE_LEVEL, newValue);
+	}
 
     public static void restore(Context context) {
         if (!isSupported()) {
             return;
         }
 
-        String storedValue = PreferenceManager.getDefaultSharedPreferences(context).getString(KEY_VIBSTRENGTH, "100");
+        String storedValue = PreferenceManager.getDefaultSharedPreferences(context).getString(DeviceSettings.KEY_VIBSTRENGTH, "2700"); 
         Utils.writeValue(FILE_LEVEL, storedValue);
     }
 
     public void onProgressChanged(SeekBar seekBar, int progress,
             boolean fromTouch) {
         setValue(String.valueOf(progress + mMinValue));
-        mValueText.setText(Integer.toString(Math.round((progress + mMinValue) / offset)) + "%");
     }
 
     public void onStartTrackingTouch(SeekBar seekBar) {
@@ -146,17 +114,27 @@ public class VibratorStrengthPreference extends DialogPreference implements
     }
 
     public void onStopTrackingTouch(SeekBar seekBar) {
-        if (mVibrator.hasVibrator())
-            mVibrator.vibrate(testVibrationPattern, -1);
+        // NA
+    }
+
+    @Override
+    protected void onDialogClosed(boolean positiveResult) {
+        super.onDialogClosed(positiveResult);
+
+        if (positiveResult) {
+            final int value = mSeekBar.getProgress() + mMinValue;
+            setValue(String.valueOf(value));
+            SharedPreferences.Editor editor = PreferenceManager.getDefaultSharedPreferences(getContext()).edit();
+            editor.putString(DeviceSettings.KEY_VIBSTRENGTH, String.valueOf(value));
+            editor.commit();
+        } else {
+            restoreOldState();
+        }
+        mVibrator.cancel();
     }
 
     private void restoreOldState() {
         setValue(String.valueOf(mOldStrength));
-    }
-
-    public void createActionButtons() {
-        setPositiveButtonText(android.R.string.ok);
-        setNegativeButtonText(android.R.string.cancel);
     }
 }
 
