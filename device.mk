@@ -117,7 +117,6 @@ PRODUCT_COPY_FILES += \
 
 #TWRP
 PRODUCT_COPY_FILES += \
-    device/xiaomi/daisy/recovery/root/etc/twrp.fstab:recovery/root/etc/twrp.fstab \
     vendor/xiaomi/daisy/proprietary/vendor/lib64/hw/bootctrl.msm8953.so:recovery/root/sbin/bootctrl.msm8953.so \
     vendor/xiaomi/daisy/proprietary/vendor/lib64/libdiag.so:recovery/root/sbin/libdiag.so \
     vendor/xiaomi/daisy/proprietary/vendor/lib64/libdrmfs.so:recovery/root/sbin/libdrmfs.so \

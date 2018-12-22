@@ -33,10 +33,10 @@ TARGET_CPU_ABI2 :=
 TARGET_CPU_VARIANT := generic
 
 TARGET_2ND_ARCH := arm
-TARGET_2ND_ARCH_VARIANT := armv8-a
+TARGET_2ND_ARCH_VARIANT :=  armv8-a
 TARGET_2ND_CPU_ABI := armeabi-v7a
 TARGET_2ND_CPU_ABI2 := armeabi
-TARGET_2ND_CPU_VARIANT := cortex-a53
+TARGET_2ND_CPU_VARIANT :=  cortex-a53
 
 # Qualcomm
 TARGET_SPECIFIC_HEADER_PATH := $(DEVICE_PATH)/include
@@ -46,6 +46,8 @@ TARGET_USES_QCOM_BSP := false
 # Kernel
 BOARD_KERNEL_CMDLINE := androidboot.hardware=qcom msm_rtb.filter=0x237 ehci-hcd.park=3 lpm_levels.sleep_disabled=1 androidboot.bootdevice=7824900.sdhci earlycon=msm_hsl_uart,0x78af000
 BOARD_KERNEL_CMDLINE += androidboot.selinux=permissive
+BOARD_KERNEL_CMDLINE += androidboot.veritymode=permissive
+BOARD_KERNEL_CMDLINE += androidboot.secureboot=0
 BOARD_KERNEL_BASE := 0x80000000
 BOARD_KERNEL_PAGESIZE :=  2048
 BOARD_KERNEL_TAGS_OFFSET := 0x00000100
@@ -60,7 +62,8 @@ TARGET_KERNEL_CROSS_COMPILE_PREFIX := aarch64-linux-android-
 
 # Partitions
 BOARD_SYSTEMIMAGE_FILE_SYSTEM_TYPE := ext4
-BOARD_USERDATAIMAGE_FILE_SYSTEM_TYPE := ext4
+#BOARD_USERDATAIMAGE_FILE_SYSTEM_TYPE := ext4
+TARGET_USERIMAGES_USE_EXT4 := true
 BOARD_VENDORIMAGE_FILE_SYSTEM_TYPE := ext4
 BOARD_PERSISTIMAGE_FILE_SYSTEM_TYPE := ext4
 BOARD_HAS_LARGE_FILESYSTEM := true
@@ -71,7 +74,7 @@ BOARD_VENDORIMAGE_PARTITION_SIZE := 805306368
 BOARD_USERDATAIMAGE_PARTITION_SIZE := 118112366592
 BOARD_PERSISTIMAGE_PARTITION_SIZE := 33554432
 BOARD_FLASH_BLOCK_SIZE := 131072
-#BOARD_USES_VENDORIMAGE := true
+BOARD_USES_VENDORIMAGE := true
 TARGET_COPY_OUT_VENDOR := vendor
 
 # Audio/media/display
@@ -255,12 +258,14 @@ ENABLE_SCHEDBOOST := true
 PLATFORM_SECURITY_PATCH := 2018-07-01
 
 # Recovery
+TARGET_USES_UEFI := true
 BOARD_HAS_NO_SELECT_BUTTON := true
 TARGET_RECOVERY_WIPE := $(DEVICE_PATH)/recovery/root/etc/recovery.wipe
+#TARGET_TWRP_FSTAB := $(DEVICE_PATH)/recovery/root/etc/twrp.fstab
 TARGET_RECOVERY_FSTAB := $(DEVICE_PATH)/recovery/root/etc/twrp.fstab
 AB_OTA_UPDATER := true
 TW_THEME := portrait_hdpi
-TW_INCLUDE_CRYPTO := true
+#TW_INCLUDE_CRYPTO := true
 TW_MAX_BRIGHTNESS := 101
 TW_BRIGHTNESS_PATH := "/sys/class/leds/lcd-backlight/brightness"
 TW_EXCLUDE_SUPERSU := true
@@ -272,11 +277,14 @@ TARGET_RECOVERY_PIXEL_FORMAT := "RGBX_8888"
 RECOVERY_SDCARD_ON_DATA := true
 RECOVERY_GRAPHICS_USE_LINELENGTH := true
 TW_EXCLUDE_DEFAULT_USB_INIT := true
+TW_SCREEN_BLANK_ON_BOOT := true
+TARGET_NO_KERNEL := false
 
+BOARD_USES_RECOVERY_AS_BOOT := true
 #RECOVERY_VARIANT := TWRP
 
 TARGET_RECOVERY_DEVICE_MODULES += android.hardware.boot@1.0
-#TW_RECOVERY_ADDITIONAL_RELINK_FILES := ${OUT_DIR}/target/product/daisy/system/lib64/android.hardware.boot@1.0.so
+TW_RECOVERY_ADDITIONAL_RELINK_FILES := ${OUT_DIR}/target/product/daisy/system/lib64/android.hardware.boot@1.0.so
 
 # Inherit from the proprietary version
 -include vendor/xiaomi/daisy/BoardConfigVendor.mk
