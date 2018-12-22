@@ -11,6 +11,10 @@
 # limitations under the License.
 #
 
+PRODUCT_RELEASE_NAME := daisy
+
+$(call inherit-product, $(SRC_TARGET_DIR)/product/embedded.mk)
+
 $(call inherit-product, device/xiaomi/daisy/full_daisy.mk)
 
 $(call inherit-product, $(SRC_TARGET_DIR)/product/core_64_bit.mk)
@@ -35,7 +39,6 @@ PRODUCT_MANUFACTURER := Xiaomi
 TARGET_VENDOR_PRODUCT_NAME := daisy
 TARGET_VENDOR_DEVICE_NAME := daisy
 PRODUCT_GMS_CLIENTID_BASE := android-xiaomi
-PRODUCT_RELEASE_NAME := daisy
 
 PRODUCT_BUILD_PROP_OVERRIDES += \
     TARGET_DEVICE="daisy" \
