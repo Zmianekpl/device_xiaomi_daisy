@@ -14,6 +14,8 @@ DEVICE_PATH := device/xiaomi/daisy
 
 BOARD_VENDOR := xiaomi
 
+TARGET_SPECIFIC_HEADER_PATH := $(DEVICE_PATH)/include
+
 # Bootloader
 TARGET_BOOTLOADER_BOARD_NAME := MSM8953
 TARGET_NO_BOOTLOADER := true
@@ -39,9 +41,8 @@ TARGET_2ND_CPU_ABI2 := armeabi
 TARGET_2ND_CPU_VARIANT :=  cortex-a53
 
 # Qualcomm
-TARGET_SPECIFIC_HEADER_PATH := $(DEVICE_PATH)/include
-#BOARD_USES_QCOM_HARDWARE := true
-#TARGET_USES_QCOM_BSP := false
+BOARD_USES_QCOM_HARDWARE := true
+TARGET_USES_QCOM_BSP := true
 
 # Kernel
 BOARD_KERNEL_CMDLINE := androidboot.hardware=qcom msm_rtb.filter=0x237 ehci-hcd.park=3 lpm_levels.sleep_disabled=1 androidboot.bootdevice=7824900.sdhci earlycon=msm_hsl_uart,0x78af000
@@ -185,8 +186,9 @@ BOARD_HAVE_QCOM_FM := true
 TARGET_QCOM_NO_FM_FIRMWARE := true
 
 # GPS
-USE_DEVICE_SPECIFIC_GPS := true
-TARGET_NO_RPC := true
+BOARD_VENDOR_QCOM_GPS_LOC_API_HARDWARE := $(TARGET_BOARD_PLATFORM)
+BOARD_VENDOR_QCOM_LOC_PDK_FEATURE_SET := true
+BOARD_VENDOR_QCOM_GPS_LOC_API_HARDWARE := true
 
 # HIDL
 DEVICE_MANIFEST_FILE := $(DEVICE_PATH)/manifest.xml
@@ -221,7 +223,7 @@ BOARD_PROPERTY_OVERRIDES_SPLIT_ENABLED := true
 TARGET_PROVIDES_QTI_TELEPHONY_JAR := true
 
 # Keymaster
-#TARGET_PROVIDES_KEYMASTER := true
+TARGET_PROVIDES_KEYMASTER := true
 TARGET_KEYMASTER_WAIT_FOR_QSEE := true
 TARGET_HW_KEYMASTER_V03 := true
 
@@ -245,7 +247,7 @@ PRODUCT_FULL_TREBLE_OVERRIDE := true
 PB_OFFICIAL := true
 
 # Peripheral manager
-#TARGET_PER_MGR_ENABLED := true
+TARGET_PER_MGR_ENABLED := true
 
 # RIL
 TARGET_RIL_VARIANT := caf
@@ -262,7 +264,7 @@ TARGET_USES_UEFI := true
 BOARD_HAS_NO_SELECT_BUTTON := true
 TARGET_RECOVERY_WIPE := $(DEVICE_PATH)/recovery/root/etc/recovery.wipe
 #TARGET_TWRP_FSTAB := $(DEVICE_PATH)/recovery/root/etc/twrp.fstab
-#TARGET_RECOVERY_FSTAB := $(DEVICE_PATH)/recovery/root/etc/twrp.fstab
+TARGET_RECOVERY_FSTAB := $(DEVICE_PATH)/recovery/root/etc/twrp.fstab
 AB_OTA_UPDATER := true
 TW_THEME := portrait_hdpi
 #TW_INCLUDE_CRYPTO := true
