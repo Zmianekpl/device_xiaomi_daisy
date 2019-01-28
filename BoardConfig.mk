@@ -260,6 +260,9 @@ TARGET_USES_UEFI := true
 BOARD_HAS_NO_SELECT_BUTTON := true
 TARGET_RECOVERY_WIPE := $(DEVICE_PATH)/recovery/root/etc/recovery.wipe
 
+# SDK
+PLATFORM_SDK_VERSION := 28
+
 AB_OTA_UPDATER := true
 TW_THEME := portrait_hdpi
 TW_MAX_BRIGHTNESS := 101
