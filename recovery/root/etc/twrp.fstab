@@ -9,8 +9,8 @@
 /system_image    	emmc              	/dev/block/bootdevice/by-name/system     		flags=slotselect
 /vendor          	ext4              		/dev/block/bootdevice/by-name/vendor     		flags=slotselect;display="Vendor";backup=1;wipeingui
 /vendor_image    emmc              	/dev/block/bootdevice/by-name/vendor     		flags=slotselect
-/data              		ext4                       	/dev/block/bootdevice/by-name/userdata    	flags=encryptable=footer
-/firmware        	vfat              		/dev/block/bootdevice/by-name/modem      	flags=slotselect;display="Firmware";mounttodecrypt
+/data              		ext4                       	/dev/block/bootdevice/by-name/userdata    	flags=encryptable=footer,fileencryption=ice:aes-256-cts
+/firmware        	vfat              		/dev/block/bootdevice/by-name/modem      	flags=slotselect;display="Firmware";mounttodecrypt;fsflags=ro
 /persist         		ext4              		/dev/block/bootdevice/by-name/persist    		flags=display="Persist"
 /bluetooth     	emmc              	/dev/block/bootdevice/by-name/bluetooth  	flags=slotselect;subpartitionof=/modem
 /misc 			emmc 			/dev/block/bootdevice/by-name/misc

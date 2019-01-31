@@ -31,7 +31,7 @@
 
 /dev/block/bootdevice/by-name/system			/               ext4    barrier=1                                                    wait,slotselect,verify
 /dev/block/bootdevice/by-name/vendor			/vendor          ext4    barrier=1                                                    wait,slotselect,verify
-/dev/block/bootdevice/by-name/userdata      /data        ext4    noatime,nosuid,nodev,barrier=0,noauto_da_alloc,discard  wait,check,forceencrypt=footer,quota
+/dev/block/bootdevice/by-name/userdata      /data        ext4    noatime,nosuid,nodev,barrier=0,noauto_da_alloc,discard  wait,check,fileencryption=ice,quota,reservedsize=128M
 /devices/soc/7864900.sdhci/mmc_host*        /storage/sdcard1 vfat  nosuid,nodev         wait,voldmanaged=sdcard1:auto,noemulatedsd,encryptable=footer
 /dev/block/mmcblk1p1							/sdcard         vfat    nosuid,nodev                                                    wait
 /dev/block/bootdevice/by-name/boot           /boot           emmc    defaults                                                        defaults

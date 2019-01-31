@@ -253,8 +253,8 @@ TARGET_RIL_VARIANT := caf
 ENABLE_CPUSETS := true
 ENABLE_SCHEDBOOST := true
 
-# Security Patch Hack to prevent Anti Rollback
-PLATFORM_SECURITY_PATCH := 2018-07-01
+# Security Patch
+PLATFORM_SECURITY_PATCH := 2018-06-05
 
 # Recovery
 TARGET_USES_UEFI := true
