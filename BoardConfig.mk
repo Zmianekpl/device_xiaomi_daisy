@@ -62,6 +62,7 @@ TARGET_KERNEL_CONFIG := daisy-perf_defconfig
 BOARD_RECOVERYIMAGE_PARTITION_SIZE := 0x04000000
 BOARD_FLASH_BLOCK_SIZE := 131072
 
+TW_CRYPTO_USE_SYSTEM_VOLD := qseecomd hwservicemanager keymaster-4-0
 BOARD_VOLD_EMMC_SHARES_DEV_MAJOR := true
 BOARD_BUILD_SYSTEM_ROOT_IMAGE := true
 BOARD_USES_RECOVERY_AS_BOOT := true
@@ -86,7 +87,7 @@ TARGET_FS_CONFIG_GEN := $(DEVICE_PATH)/config.fs
 TARGET_USES_MKE2FS := true
 
 # Root Folders
-BOARD_ROOT_EXTRA_FOLDERS := bt_firmware dsp firmware persist
+#BOARD_ROOT_EXTRA_FOLDERS := bt_firmware dsp firmware persist
 
 # Audio/media/display
 TARGET_QCOM_AUDIO_VARIANT := caf-msm8996
@@ -208,7 +209,7 @@ DEVICE_MATRIX_FILE := $(DEVICE_PATH)/compatibility_matrix.xml
 TARGET_EXFAT_DRIVER := sdfat
 
 # Encryption
-TARGET_HW_DISK_ENCRYPTION := true
+#TARGET_HW_DISK_ENCRYPTION := true
 TARGET_CRYPTFS_HW_PATH := vendor/qcom/opensource/commonsys/cryptfs_hw
 
 # CNE / DPM
@@ -258,7 +259,7 @@ PLATFORM_SECURITY_PATCH := 2018-07-01
 # Recovery
 TARGET_USES_UEFI := true
 BOARD_HAS_NO_SELECT_BUTTON := true
-TARGET_RECOVERY_WIPE := $(DEVICE_PATH)/recovery/root/etc/recovery.wipe
+TARGET_RECOVERY_WIPE := $(DEVICE_PATH)/recovery.wipe
 
 # SDK
 PLATFORM_SDK_VERSION := 28
@@ -276,15 +277,23 @@ TARGET_RECOVERY_PIXEL_FORMAT := "RGBX_8888"
 RECOVERY_SDCARD_ON_DATA := true
 RECOVERY_GRAPHICS_USE_LINELENGTH := true
 TW_EXCLUDE_DEFAULT_USB_INIT := true
+TW_USE_TOOLBOX := true
+TWRP_INCLUDE_LOGCAT := true
 
-#TARGET_TWRP_FSTAB := $(DEVICE_PATH)/recovery/root/etc/twrp.fstab
-#TARGET_RECOVERY_FSTAB := $(DEVICE_PATH)/recovery/root/etc/recovery.fstab
-#TW_INCLUDE_CRYPTO := true
+PLATFORM_SECURITY_PATCH := 2025-12-31
+
+TARGET_RECOVERY_FSTAB := $(DEVICE_PATH)/recovery.fstab
+TW_INCLUDE_CRYPTO := true
+#TW_INCLUDE_CRYPTO_FBE := false
 #TW_SCREEN_BLANK_ON_BOOT := true
 #TARGET_NO_KERNEL := false
 
+# Android Verified Boot
+BOARD_AVB_ENABLE := false
+BOARD_BUILD_DISABLED_VBMETAIMAGE := true
+
 TARGET_RECOVERY_DEVICE_MODULES += android.hardware.boot@1.0
-TW_RECOVERY_ADDITIONAL_RELINK_FILES := ${OUT_DIR}/target/product/daisy/system/lib64/android.hardware.boot@1.0.so
+#TW_RECOVERY_ADDITIONAL_RELINK_FILES := ${OUT_DIR}/target/product/daisy/system/lib64/android.hardware.boot@1.0.so
 
 # Inherit from the proprietary version
 -include vendor/xiaomi/daisy/BoardConfigVendor.mk

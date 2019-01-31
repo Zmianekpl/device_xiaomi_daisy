@@ -1,4 +1,4 @@
-# Copyright (c) 2017, The Linux Foundation. All rights reserved.
+# Copyright (c) 2014, The Linux Foundation. All rights reserved.
 #
 # Redistribution and use in source and binary forms, with or without
 # modification, are permitted provided that the following conditions are
@@ -25,16 +25,5 @@
 # OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN
 # IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
-# This is stock variant of fstab
+dev_mount sdcard /storage/sdcard1 auto /devices/msm_sdcc.2/mmc_host
 
-#device         mount point      fstype        [device2] [length=]
-
-/dev/block/bootdevice/by-name/system			/               ext4    barrier=1                                                    wait,slotselect,verify
-/dev/block/bootdevice/by-name/vendor			/vendor          ext4    barrier=1                                                    wait,slotselect,verify
-/dev/block/bootdevice/by-name/userdata			/data           ext4    noatime,nosuid,nodev,barrier=1,data=ordered,noauto_da_alloc     wait,check
-/dev/block/mmcblk1p1							/sdcard         vfat    nosuid,nodev                                                    wait
-/dev/block/bootdevice/by-name/boot           /boot           emmc    defaults                                                        defaults
-/dev/block/bootdevice/by-name/misc           /misc           emmc    defaults                                                        defaults
-
-# USB-OTG
-/devices/platform/soc/7000000.ssusb/7000000.dwc3/xhci-hcd.0.auto   /storage/usbotg    vfat    nosuid,nodev    wait,voldmanaged=usbotg:auto
