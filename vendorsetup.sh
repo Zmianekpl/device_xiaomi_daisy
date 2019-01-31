@@ -1,3 +1,3 @@
-add_lunch_combo omni_daisy-userdebug
-add_lunch_combo omni_daisy-user
-add_lunch_combo omni_daisy-eng
+add_lunch_combo omni_daisy_sprout-userdebug
+add_lunch_combo omni_daisy_sprout-user
+add_lunch_combo omni_daisy_sprout-eng

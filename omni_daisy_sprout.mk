@@ -15,7 +15,7 @@ PRODUCT_RELEASE_NAME := daisy
 
 $(call inherit-product, $(SRC_TARGET_DIR)/product/embedded.mk)
 
-$(call inherit-product, device/xiaomi/daisy/full_daisy.mk)
+$(call inherit-product, device/xiaomi/daisy/full_daisy_sprout.mk)
 
 $(call inherit-product, $(SRC_TARGET_DIR)/product/core_64_bit.mk)
 
@@ -31,17 +31,17 @@ $(call inherit-product, vendor/omni/config/common.mk)
 # Inherit from the common Open Source product configuration
 $(call inherit-product, $(SRC_TARGET_DIR)/product/aosp_base_telephony.mk)
 
-PRODUCT_NAME := omni_daisy
-PRODUCT_DEVICE := daisy
+PRODUCT_NAME := omni_daisy_sprout
+PRODUCT_DEVICE := daisy_sprout
 PRODUCT_BRAND := Xiaomi
 PRODUCT_MODEL := MI A2 Lite
 PRODUCT_MANUFACTURER := Xiaomi
-TARGET_VENDOR_PRODUCT_NAME := daisy
-TARGET_VENDOR_DEVICE_NAME := daisy
+TARGET_VENDOR_PRODUCT_NAME := daisy_sprout
+TARGET_VENDOR_DEVICE_NAME := daisy_sprout
 PRODUCT_GMS_CLIENTID_BASE := android-xiaomi
 
 PRODUCT_BUILD_PROP_OVERRIDES += \
-    TARGET_DEVICE="daisy" \
-    PRODUCT_NAME="daisy" \
+    TARGET_DEVICE="daisy_sprout" \
+    PRODUCT_NAME="daisy_sprout" \
     BUILD_FINGERPRINT="xiaomi/daisy/daisy_sprout:9/PKQ1.180917.001/V10.0.1.0.PDLMIFJ:user/release-keys" \
 PRIVATE_BUILD_DESC="daisy-user 9 PKQ1.180917.001 V10.0.1.0.PDLMIFJ release-keys"

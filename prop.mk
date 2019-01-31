@@ -1,5 +1,5 @@
 #
-# system.prop for Daisy
+# system.prop for Daisy_sprout
 #
 
 # Audio
