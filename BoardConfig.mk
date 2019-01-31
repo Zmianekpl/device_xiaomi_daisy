@@ -293,7 +293,7 @@ BOARD_AVB_ENABLE := false
 BOARD_BUILD_DISABLED_VBMETAIMAGE := true
 
 TARGET_RECOVERY_DEVICE_MODULES += android.hardware.boot@1.0
-#TW_RECOVERY_ADDITIONAL_RELINK_FILES := ${OUT_DIR}/target/product/daisy_sprout/system/lib64/android.hardware.boot@1.0.so
+#TW_RECOVERY_ADDITIONAL_RELINK_FILES := ${OUT_DIR}/target/product/daisy/system/lib64/android.hardware.boot@1.0.so
 
 # Inherit from the proprietary version
 -include vendor/xiaomi/daisy/BoardConfigVendor.mk

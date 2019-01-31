@@ -15,6 +15,6 @@
 #
 
 PRODUCT_MAKEFILES := \
-    $(LOCAL_DIR)/full_daisy_sprout.mk \
-    $(LOCAL_DIR)/omni_daisy_sprout.mk
+    $(LOCAL_DIR)/full_daisy.mk \
+    $(LOCAL_DIR)/omni_daisy.mk
 
