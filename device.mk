@@ -115,40 +115,6 @@ PRODUCT_COPY_FILES += \
     frameworks/native/data/etc/android.hardware.vulkan.version-1_0_3.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/android.hardware.vulkan.version-1_0_3.xml \
     frameworks/native/data/etc/android.hardware.consumerir.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/android.hardware.consumerir.xml
 
-#TWRP
-#PRODUCT_COPY_FILES += \
-#    vendor/xiaomi/daisy/proprietary/vendor/lib64/hw/bootctrl.msm8953.so:recovery/root/sbin/bootctrl.msm8953.so \
-#    vendor/xiaomi/daisy/proprietary/vendor/lib64/libdiag.so:recovery/root/sbin/libdiag.so \
-#    vendor/xiaomi/daisy/proprietary/vendor/lib64/libdrmfs.so:recovery/root/sbin/libdrmfs.so \
-#    vendor/xiaomi/daisy/proprietary/vendor/lib64/libdrmtime.so:recovery/root/sbin/libdrmtime.so \
-#    vendor/xiaomi/daisy/proprietary/vendor/lib64/libQSEEComAPI.so:recovery/root/sbin/libQSEEComAPI.so \
-#    vendor/xiaomi/daisy/proprietary/vendor/lib64/librpmb.so:recovery/root/sbin/librpmb.so \
-#    vendor/xiaomi/daisy/proprietary/vendor/lib64/libssd.so:recovery/root/sbin/libssd.so \
-#    vendor/xiaomi/daisy/proprietary/vendor/bin/qseecomd:recovery/root/sbin/qseecomd \
-#    vendor/xiaomi/daisy/proprietary/vendor/bin/hw/android.hardware.keymaster@3.0-service-qti:recovery/root/sbin/android.hardware.keymaster@3.0-service-qti \
-#    device/xiaomi/daisy/recovery/root/vintf/compatibility_matrix.1.xml:recovery/root/vendor/compatibility_matrix.1.xml \
-#    device/xiaomi/daisy/recovery/root/vintf/compatibility_matrix.2.xml:recovery/root/vendor/compatibility_matrix.2.xml \
-#    device/xiaomi/daisy/recovery/root/vintf/compatibility_matrix.3.xml:recovery/root/vendor/compatibility_matrix.3.xml \
-#    device/xiaomi/daisy/recovery/root/vintf/compatibility_matrix.device.xml:recovery/root/vendor/compatibility_matrix.device.xml \
-#    device/xiaomi/daisy/recovery/root/vintf/compatibility_matrix.legacy.xml:recovery/root/vendor/compatibility_matrix.legacy.xml \
-#    vendor/xiaomi/daisy/proprietary/vendor/etc/vintf/manifest.xml:recovery/root/vendor/etc/vintf/manifest.xml \
-#    device/xiaomi/daisy/recovery/root/vintf/manifest.xml:recovery/root/vendor/system_manifest.xml \
-#    vendor/xiaomi/daisy/proprietary/vendor/etc/vintf/compatibility_matrix.xml:recovery/root/vendor/etc/vintf/compatibility_matrix.xml \
-#    vendor/xiaomi/daisy/proprietary/vendor/lib64/hw/android.hardware.boot@1.0-impl.so:recovery/root/vendor/lib64/hw/android.hardware.boot@1.0-impl.so \
-#    vendor/xiaomi/daisy/proprietary/vendor/lib64/hw/android.hardware.gatekeeper@1.0-impl-qti.so:recovery/root/vendor/lib64/hw/android.hardware.gatekeeper@1.0-impl-qti.so \
-#    vendor/xiaomi/daisy/proprietary/vendor/lib64/hw/android.hardware.keymaster@3.0-impl-qti.so:recovery/root/vendor/lib64/hw/android.hardware.keymaster@3.0-impl-qti.so \
-#    vendor/xiaomi/daisy/proprietary/vendor/lib64/hw/gatekeeper.msm8953.so:recovery/root/vendor/lib64/hw/gatekeeper.msm8953.so \
-#    vendor/xiaomi/daisy/proprietary/vendor/lib64/hw/keystore.msm8953.so:recovery/root/vendor/lib64/hw/keystore.msm8953.so \
-#    vendor/xiaomi/daisy/proprietary/vendor/lib64/hw/bootctrl.msm8953.so:recovery/root/vendor/lib64/hw/bootctrl.msm8953.so \
-#    device/xiaomi/daisy/recovery/root/init.recovery.usb.rc:root/init.recovery.usb.rc \
-#    device/xiaomi/daisy/recovery/root/vendor_hwservice_contexts:recovery/root/vendor_hwservice_contexts \
-#    device/xiaomi/daisy/recovery/root/plat_hwservice_contexts:recovery/root/plat_hwservice_contexts \
-#    device/xiaomi/daisy/recovery/root/nonplat_service_contexts:recovery/root/nonplat_service_contexts \
-#    device/xiaomi/daisy/recovery/root/plat_service_contexts:recovery/root/plat_service_contexts \
-#    vendor/xiaomi/daisy/proprietary/vendor/bin/hw/android.hardware.gatekeeper@1.0-service-qti:recovery/root/sbin/android.hardware.gatekeeper@1.0-service-qti \
-#    device/xiaomi/daisy/recovery/root/sbin/prepdecrypt.sh:recovery/root/sbin/prepdecrypt.sh \
-#    vendor/xiaomi/daisy/proprietary/vendor/bin/hw/android.hardware.boot@1.0-service:recovery/root/sbin/android.hardware.boot@1.0-service \
-#    vendor/xiaomi/daisy/proprietary/lib64/android.hardware.confirmationui@1.0.so:recovery/root/sbin/android.hardware.confirmationui@1.0.so
 
 # Audio
 PRODUCT_PACKAGES += \
@@ -156,6 +122,8 @@ PRODUCT_PACKAGES += \
     android.hardware.audio@2.0-service \
     android.hardware.audio.effect@2.0-impl \
     android.hardware.audio.effect@2.0-service \
+    android.hardware.audio@4.0-impl \
+    android.hardware.audio.effect@4.0-impl \
     android.hardware.soundtrigger@2.0-impl \
     android.hardware.soundtrigger@2.0-service \
     audio.a2dp.default \
@@ -182,11 +150,11 @@ PRODUCT_COPY_FILES += \
 # XML Audio configuration files
 PRODUCT_COPY_FILES += \
 	$(LOCAL_PATH)/audio/audio_policy_configuration.xml:$(TARGET_COPY_OUT_VENDOR)/etc/audio_policy_configuration.xml \
-	$(TOPDIR)frameworks/av/services/audiopolicy/config/a2dp_audio_policy_configuration.xml:$(TARGET_COPY_OUT_VENDOR)/etc/a2dp_audio_policy_configuration.xml \
-	$(TOPDIR)frameworks/av/services/audiopolicy/config/audio_policy_volumes.xml:$(TARGET_COPY_OUT_VENDOR)/etc/audio_policy_volumes.xml \
-	$(TOPDIR)frameworks/av/services/audiopolicy/config/default_volume_tables.xml:$(TARGET_COPY_OUT_VENDOR)/etc/default_volume_tables.xml \
-	$(TOPDIR)frameworks/av/services/audiopolicy/config/r_submix_audio_policy_configuration.xml:$(TARGET_COPY_OUT_VENDOR)/etc/r_submix_audio_policy_configuration.xml \
-	$(TOPDIR)frameworks/av/services/audiopolicy/config/usb_audio_policy_configuration.xml:$(TARGET_COPY_OUT_VENDOR)/etc/usb_audio_policy_configuration.xml
+	$(LOCAL_PATH)/audio/a2dp_audio_policy_configuration.xml:$(TARGET_COPY_OUT_VENDOR)/etc/a2dp_audio_policy_configuration.xml \
+	$(LOCAL_PATH)/audio/audio_policy_volumes.xml:$(TARGET_COPY_OUT_VENDOR)/etc/audio_policy_volumes.xml \
+	$(LOCAL_PATH)/audio/default_volume_tables.xml:$(TARGET_COPY_OUT_VENDOR)/etc/default_volume_tables.xml \
+	$(LOCAL_PATH)/audio/r_submix_audio_policy_configuration.xml:$(TARGET_COPY_OUT_VENDOR)/etc/r_submix_audio_policy_configuration.xml \
+	$(LOCAL_PATH)/audio/usb_audio_policy_configuration.xml:$(TARGET_COPY_OUT_VENDOR)/etc/usb_audio_policy_configuration.xml
 
 # ConsumerIr
 PRODUCT_PACKAGES += \
@@ -434,11 +402,11 @@ PRODUCT_PACKAGES += \
 
 
 # VNDK
-PRODUCT_PACKAGES += vndk-sp
+#PRODUCT_PACKAGES += vndk-sp
 
-PRODUCT_COPY_FILES += \
-    prebuilts/vndk/v27/arm/arch-arm-armv7-a-neon/shared/vndk-core/android.frameworks.sensorservice@1.0.so:$(TARGET_COPY_OUT_VENDOR)/lib/android.frameworks.sensorservice@1.0-v27.so \
-    prebuilts/vndk/v27/arm64/arch-arm64-armv8-a/shared/vndk-core/android.frameworks.sensorservice@1.0.so:$(TARGET_COPY_OUT_VENDOR)/lib64/android.frameworks.sensorservice@1.0-v27.so
+#PRODUCT_COPY_FILES += \
+#    prebuilts/vndk/v27/arm/arch-arm-armv7-a-neon/shared/vndk-core/android.frameworks.sensorservice@1.0.so:$(TARGET_COPY_OUT_VENDOR)/lib/android.frameworks.sensorservice@1.0-v27.so \
+#    prebuilts/vndk/v27/arm64/arch-arm64-armv8-a/shared/vndk-core/android.frameworks.sensorservice@1.0.so:$(TARGET_COPY_OUT_VENDOR)/lib64/android.frameworks.sensorservice@1.0-v27.so
 
 # Thermal
 PRODUCT_PACKAGES += \
@@ -457,13 +425,6 @@ PRODUCT_PACKAGES += \
 PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/configs/qti_whitelist.xml:system/etc/sysconfig/qti_whitelist.xml
 
-# VR
-PRODUCT_PACKAGES += \
-    vr.msm8953
-
-PRODUCT_PACKAGES += \
-    android.hardware.vr@1.0-impl \
-    android.hardware.vr@1.0-service
 
 # Wifi
 PRODUCT_PACKAGES += \

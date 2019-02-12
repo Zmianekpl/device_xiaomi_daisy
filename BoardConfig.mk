@@ -62,7 +62,6 @@ TARGET_KERNEL_CONFIG := daisy-perf_defconfig
 BOARD_RECOVERYIMAGE_PARTITION_SIZE := 0x04000000
 BOARD_FLASH_BLOCK_SIZE := 131072
 
-TW_CRYPTO_USE_SYSTEM_VOLD := qseecomd hwservicemanager keymaster-3-0
 BOARD_VOLD_EMMC_SHARES_DEV_MAJOR := true
 BOARD_BUILD_SYSTEM_ROOT_IMAGE := true
 BOARD_USES_RECOVERY_AS_BOOT := true
@@ -85,9 +84,6 @@ BOARD_USES_VENDORIMAGE := true
 TARGET_COPY_OUT_VENDOR := vendor
 TARGET_FS_CONFIG_GEN := $(DEVICE_PATH)/config.fs
 TARGET_USES_MKE2FS := true
-
-# Root Folders
-#BOARD_ROOT_EXTRA_FOLDERS := bt_firmware dsp firmware persist
 
 # Audio/media/display
 TARGET_QCOM_AUDIO_VARIANT := caf-msm8996
@@ -235,14 +231,6 @@ TARGET_HAS_NO_WIFI_STATS := true
 TARGET_USES_INTERACTION_BOOST := true
 TARGET_TAP_TO_WAKE_NODE := "/proc/touchpanel/enable_dt2w"
 
-# Treble
-#ENABLE_VENDOR_IMAGE := true
-#PRODUCT_VENDOR_MOVE_ENABLED := true
-PRODUCT_SHIPPING_API_LEVEL := 27
-#BOARD_PROPERTY_OVERRIDES_SPLIT_ENABLED := true
-#PRODUCT_FULL_TREBLE_OVERRIDE := true
-PB_OFFICIAL := true
-
 # Peripheral manager
 #TARGET_PER_MGR_ENABLED := true
 
@@ -253,9 +241,6 @@ TARGET_RIL_VARIANT := caf
 ENABLE_CPUSETS := true
 ENABLE_SCHEDBOOST := true
 
-# Security Patch
-PLATFORM_SECURITY_PATCH := 2018-06-05
-
 # Recovery
 TARGET_USES_UEFI := true
 BOARD_HAS_NO_SELECT_BUTTON := true
@@ -265,35 +250,19 @@ TARGET_RECOVERY_WIPE := $(DEVICE_PATH)/recovery.wipe
 PLATFORM_SDK_VERSION := 28
 
 AB_OTA_UPDATER := true
-TW_THEME := portrait_hdpi
-TW_MAX_BRIGHTNESS := 101
-TW_BRIGHTNESS_PATH := "/sys/class/leds/lcd-backlight/brightness"
-TW_EXCLUDE_SUPERSU := true
-TW_EXTRA_LANGUAGES := true
-TW_NO_SCREEN_BLANK := true
-TW_INPUT_BLACKLIST := "hbtp_vm"
 TARGET_RECOVERY_QCOM_RTC_FIX := true
 TARGET_RECOVERY_PIXEL_FORMAT := "RGBX_8888"
 RECOVERY_SDCARD_ON_DATA := true
 RECOVERY_GRAPHICS_USE_LINELENGTH := true
-TW_EXCLUDE_DEFAULT_USB_INIT := true
-TW_USE_TOOLBOX := true
-TWRP_INCLUDE_LOGCAT := true
 
 PLATFORM_SECURITY_PATCH := 2025-12-31
 
-TARGET_RECOVERY_FSTAB := $(DEVICE_PATH)/recovery.fstab
-TW_INCLUDE_CRYPTO := true
-#TW_INCLUDE_CRYPTO_FBE := false
-#TW_SCREEN_BLANK_ON_BOOT := true
-#TARGET_NO_KERNEL := false
-
 # Android Verified Boot
 BOARD_AVB_ENABLE := false
-BOARD_BUILD_DISABLED_VBMETAIMAGE := true
 
-TARGET_RECOVERY_DEVICE_MODULES += android.hardware.boot@1.0
-#TW_RECOVERY_ADDITIONAL_RELINK_FILES := ${OUT_DIR}/target/product/daisy/system/lib64/android.hardware.boot@1.0.so
+BOARD_ROOT_EXTRA_SYMLINKS += /vendor/lib/dsp:/dsp
+BOARD_ROOT_EXTRA_SYMLINKS += /mnt/vendor/persist:/persist
+BOARD_ROOT_EXTRA_SYMLINKS += /vendor/firmware_mnt:/firmware
 
 # Inherit from the proprietary version
 -include vendor/xiaomi/daisy/BoardConfigVendor.mk
