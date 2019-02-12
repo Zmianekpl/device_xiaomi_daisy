@@ -124,10 +124,6 @@ PRODUCT_PACKAGES += \
 PRODUCT_PACKAGES += \
     android.hardware.configstore@1.0-service
 
-# Consumerir
-PRODUCT_PACKAGES += \
-    android.hardware.ir@1.0-service.xiaomi_daisy
-
 # Display
 PRODUCT_PACKAGES += \
     android.hardware.graphics.allocator@2.0-impl \
@@ -169,10 +165,6 @@ PRODUCT_PACKAGES += \
     ebtables \
     ethertypes \
     libebtc
-
-# Fingerprint
-PRODUCT_PACKAGES += \
-    android.hardware.biometrics.fingerprint@2.1-service.xiaomi_daisy
 
 # FM
 PRODUCT_PACKAGES += \
