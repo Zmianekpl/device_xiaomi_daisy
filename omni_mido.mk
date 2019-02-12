@@ -23,8 +23,8 @@ $(call inherit-product, vendor/omni/config/gsm.mk)
 # Inherit from the common Open Source product configuration
 $(call inherit-product, $(SRC_TARGET_DIR)/product/aosp_base_telephony.mk)
 
-# Inherit from mido device
-$(call inherit-product, device/xiaomi/mido/device.mk)
+# Inherit from daisy device
+$(call inherit-product, device/xiaomi/daisy/device.mk)
 
 # CarrierConfig
 PRODUCT_PACKAGE_OVERLAYS += vendor/omni/overlay/CarrierConfig
@@ -36,10 +36,10 @@ $(call inherit-product, vendor/omni/config/common.mk)
 TARGET_BOOTANIMATION_SIZE := 1080p
 
 # Device identifier. This must come after all inclusions
-PRODUCT_DEVICE := mido
-PRODUCT_NAME := omni_mido
+PRODUCT_DEVICE := daisy
+PRODUCT_NAME := omni_daisy
 PRODUCT_BRAND := Xiaomi
-PRODUCT_MODEL := Redmi Note 4
+PRODUCT_MODEL := Mi A2 Lite
 PRODUCT_MANUFACTURER := Xiaomi
 TARGET_VENDOR := Xiaomi
 BOARD_VENDOR := Xiaomi
@@ -47,7 +47,7 @@ BOARD_VENDOR := Xiaomi
 PRODUCT_GMS_CLIENTID_BASE := android-xiaomi
 
 PRODUCT_BUILD_PROP_OVERRIDES += \
-    PRIVATE_BUILD_DESC="mido-user 7.0 NRD90M V9.6.1.0.NCFMIFD release-keys"
+    PRIVATE_BUILD_DESC="daisy_sprout-user 9.0 PKQ1.180917.001 V10.0.3.0.PDLMIXM release-keys"
 
 # Set BUILD_FINGERPRINT variable to be picked up by both system and vendor build.prop
-BUILD_FINGERPRINT := "xiaomi/mido/mido:7.0/NRD90M/V9.6.1.0.NCFMIFD:user/release-keys"
+BUILD_FINGERPRINT := "xiaomi/daisy/daisy_sprout:9/PKQ1.180917.001/V10.0.3.0.PDLMIXM:user/release-keys"

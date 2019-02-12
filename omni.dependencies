@@ -61,12 +61,6 @@
   },
   {
     "remote": "omnirom",
-    "repository": "android_kernel_xiaomi_msm8953",
-    "target_path": "kernel/xiaomi/msm8953",
-    "revision": "android-9.0"
-  },
-  {
-    "remote": "omnirom",
     "repository": "android_external_json-c",
     "target_path": "external/json-c",
     "revision": "android-9.0"

@@ -85,7 +85,7 @@ if __name__ == "__main__":
     vendorPath = '../../../vendor/' + vendor + '/' + device + '/proprietary'
     gensha1(lines1, device, vendor, vendorPath)
 
-    device='mido'
+    device='daisy'
     vendor='xiaomi'
     vendorPath = '../../../vendor/' + vendor + '/' + device + '/proprietary'
     gensha1(lines2, device, vendor, vendorPath)

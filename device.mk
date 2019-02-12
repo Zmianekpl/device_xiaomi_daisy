@@ -14,7 +14,7 @@
 # limitations under the License.
 #
 
-$(call inherit-product, vendor/xiaomi/mido/mido-vendor.mk)
+$(call inherit-product, vendor/xiaomi/daisy/daisy-vendor.mk)
 $(call inherit-product, vendor/xiaomi/msm8953-common/msm8953-common-vendor.mk)
 $(call inherit-product, $(SRC_TARGET_DIR)/product/product_launched_with_m.mk)
 $(call inherit-product, vendor/omni/config/phone-xxhdpi-3072-dalvik-heap.mk)
@@ -126,7 +126,7 @@ PRODUCT_PACKAGES += \
 
 # Consumerir
 PRODUCT_PACKAGES += \
-    android.hardware.ir@1.0-service.xiaomi_mido
+    android.hardware.ir@1.0-service.xiaomi_daisy
 
 # Display
 PRODUCT_PACKAGES += \
@@ -172,7 +172,7 @@ PRODUCT_PACKAGES += \
 
 # Fingerprint
 PRODUCT_PACKAGES += \
-    android.hardware.biometrics.fingerprint@2.1-service.xiaomi_mido
+    android.hardware.biometrics.fingerprint@2.1-service.xiaomi_daisy
 
 # FM
 PRODUCT_PACKAGES += \
@@ -354,7 +354,7 @@ PRODUCT_COPY_FILES += \
 
 # USB HAL
 PRODUCT_PACKAGES += \
-    android.hardware.usb@1.0-service.mido
+    android.hardware.usb@1.0-service.daisy
 
 # Vibrator
 PRODUCT_PACKAGES += \
