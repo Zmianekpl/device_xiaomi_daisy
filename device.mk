@@ -206,10 +206,7 @@ PRODUCT_PACKAGES += \
 PRODUCT_PACKAGES += \
     ims-ext-common
 
-#QTI performance
-PRODUCT_BOOT_JARS += \
-#    QPerformance \
-    UxPerformance
+
 
 # Input
 PRODUCT_COPY_FILES += \
@@ -309,8 +306,23 @@ PRODUCT_PACKAGES += \
     libxml2 \
     telephony-ext
 
+#QTI performance
+ifneq ($(strip $(QCPATH)),)
+PRODUCT_BOOT_JARS += UxPerformance
+endif
+
+ifneq ($(strip $(QCPATH)),)
+PRODUCT_BOOT_JARS += QPerformance
+endif
+
 PRODUCT_BOOT_JARS += \
     telephony-ext
+
+# Wi-Fi Display
+
+ifneq ($(strip $(QCPATH)),)
+PRODUCT_BOOT_JARS += WfdCommon
+endif
 
 # Seccomp policy
 PRODUCT_COPY_FILES += \
@@ -381,8 +393,3 @@ PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/wifi/wpa_supplicant_overlay.conf:$(TARGET_COPY_OUT_VENDOR)/etc/wifi/wpa_supplicant_overlay.conf \
     $(LOCAL_PATH)/wifi/WCNSS_cfg.dat:system/etc/firmware/wlan/prima/WCNSS_cfg.dat \
     $(LOCAL_PATH)/wifi/WCNSS_qcom_cfg.ini:$(TARGET_COPY_OUT_VENDOR)/etc/wifi/WCNSS_qcom_cfg.ini
-
-# Wi-Fi Display
-ifneq ($(strip $(QCPATH)),)
-PRODUCT_BOOT_JARS += WfdCommon
-endif
