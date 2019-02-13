@@ -212,15 +212,17 @@ TARGET_QCOM_MEDIA_VARIANT := caf-msm8996
 USE_DEVICE_SPECIFIC_DATA_IPA_CFG_MGR := true
 
 # Security patch level
-VENDOR_SECURITY_PATCH := 2018-12-05
+VENDOR_SECURITY_PATCH := 2019-01-05
+
+TARGET_OTA_ASSERT_DEVICE := daisy,daisy_sprout
 
 # SELinux
-include device/qcom/sepolicy/sepolicy.mk
-include vendor/omni/sepolicy/sepolicy.mk
-BOARD_PLAT_PRIVATE_SEPOLICY_DIR += $(DEVICE_PATH)/sepolicy/private
-BOARD_SEPOLICY_DIRS += $(DEVICE_PATH)/sepolicy/vendor
-BOARD_SEPOLICY_VERS := 28.0
-SELINUX_IGNORE_NEVERALLOWS := true
+#include device/qcom/sepolicy/sepolicy.mk
+#include vendor/omni/sepolicy/sepolicy.mk
+#BOARD_PLAT_PRIVATE_SEPOLICY_DIR += $(DEVICE_PATH)/sepolicy/private
+#BOARD_SEPOLICY_DIRS += $(DEVICE_PATH)/sepolicy/vendor
+#BOARD_SEPOLICY_VERS := 28.0
+#SELINUX_IGNORE_NEVERALLOWS := true
 
 # Treble
 BOARD_PROPERTY_OVERRIDES_SPLIT_ENABLED := true

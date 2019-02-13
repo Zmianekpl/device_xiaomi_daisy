@@ -53,7 +53,8 @@ persist.camera.gyro.disable=0 \
 persist.camera.isp.clock.optmz=0 \
 persist.camera.stats.test=5 \
 persist.vendor.qti.telephony.vt_cam_interface=1 \
-vidc.enc.dcvs.extra-buff-count=2
+vidc.enc.dcvs.extra-buff-count=2 \
+persist.camera.HAL3.enabled=1
 
 # Cne
 PRODUCT_PROPERTY_OVERRIDES += \
@@ -203,3 +204,13 @@ persist.sys.wfd.virtual=0
 PRODUCT_PROPERTY_OVERRIDES += \
 dalvik.vm.dex2oat-filter=speed \
 dalvik.vm.image-dex2oat-filter=speed
+
+#QTI Performance
+PRODUCT_PROPERTY_OVERRIDES += \
+vendor.enable_prefetch=1 \
+vendor.iop.enable_uxe=1 \
+vendor.iop.enable_prefetch_ofr=1 \
+vendor.perf.iop_v3.enable=1 \
+ro.vendor.at_library=libqti-at.so \
+persist.vendor.qti.games.gt.prof=1
+
