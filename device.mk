@@ -149,11 +149,6 @@ PRODUCT_PACKAGES += \
     libgenlock \
     libtinyxml
 
-# Doze mode
-PRODUCT_PACKAGES += \
-    OmniDoze \
-    OmniParts
-
 # OMNI Charger Images
 PRODUCT_PACKAGES += \
     omni_charger_res_images \
