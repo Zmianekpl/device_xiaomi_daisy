@@ -14,6 +14,10 @@
 # limitations under the License.
 #
 
+# Inherit from the proprietary version
+-include vendor/xiaomi/daisy/BoardConfigVendor.mk
+-include vendor/xiaomi/msm8953-common/BoardConfigVendor.mk
+
 DEVICE_PATH := device/xiaomi/daisy
 
 TARGET_SPECIFIC_HEADER_PATH := $(DEVICE_PATH)/include
@@ -240,6 +244,3 @@ WIFI_DRIVER_FW_PATH_AP := "ap"
 WIFI_DRIVER_FW_PATH_STA := "sta"
 WPA_SUPPLICANT_VERSION := VER_0_8_X
 
-# Inherit from the proprietary version
--include vendor/xiaomi/daisy/BoardConfigVendor.mk
--include vendor/xiaomi/msm8953-common/BoardConfigVendor.mk

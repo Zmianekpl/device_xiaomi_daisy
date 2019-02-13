@@ -680,3 +680,5 @@ vendor/etc/wifi/wpa_supplicant_overlay.conf
 vendor/lib64/libkeystore-engine-wifi-hidl.so
 vendor/lib64/libkeystore-wifi-hidl.so
 vendor/lib64/libwifi-hal.so
+
+framework/QPerformance.jar
