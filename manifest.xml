@@ -831,7 +831,4 @@
         </interface>
         <fqname>@1.0::IMTService/default</fqname>
     </hal>
-    <sepolicy>
-        <version>28.0</version>
-    </sepolicy>
 </manifest>
